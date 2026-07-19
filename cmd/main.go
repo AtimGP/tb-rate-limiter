@@ -9,7 +9,7 @@ import (
 	"hl-rate-limiter/internal/handlers"
 	"hl-rate-limiter/internal/middleware"
 	"hl-rate-limiter/internal/models"
-	memory "hl-rate-limiter/internal/storage"
+	"hl-rate-limiter/internal/storage"
 )
 
 type mockService struct{}
@@ -27,7 +27,7 @@ func main() {
 	logger := slog.New(jsonHandler)
 	slog.SetDefault(logger)
 
-	service := memory.NewMemoryLimiter()
+	service := storage.NewMemoryLimiter()
 	limiterHandler := handlers.NewLimiterHandler(service)
 
 	mux := http.NewServeMux()

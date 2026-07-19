@@ -1,6 +1,5 @@
 package models
 
-
 type LimiterRequest struct {
 	Key		string
 	Limit	int
