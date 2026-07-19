@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+  build:
+  context: .
+  dockerfile: dockerfile
+  container_name: hl-rate-limiter
+  ports:
+  - "8080:8080"
