@@ -1,26 +1,14 @@
 package main
 
 import (
-	"context"
 	"log/slog"
 	"net/http"
 	"os"
 
 	"tb-rate-limiter/internal/handlers"
 	"tb-rate-limiter/internal/middleware"
-	"tb-rate-limiter/internal/models"
 	"tb-rate-limiter/internal/storage"
 )
-
-type mockService struct{}
-
-func (s *mockService) Verify(ctx context.Context, req models.LimiterRequest) (models.LimiterResponse, error) {
-	return models.LimiterResponse{
-		Allowed: true,
-		Remaining: req.Limit-1,
-		ResetAfter: "1s",
-	}, nil
-}
 
 func main() {
 	jsonHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug})
