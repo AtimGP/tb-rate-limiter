@@ -19,7 +19,7 @@ func main() {
 	limiterHandler := handlers.NewLimiterHandler(service)
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /v1/limiter/check", limiterHandler.CreateResponse)
+	mux.HandleFunc("POST /v1/limiter/verify", limiterHandler.CreateResponse)
 	mux.HandleFunc("GET /panic", func(w http.ResponseWriter, r *http.Request) {
 		panic("Паника")
 	})

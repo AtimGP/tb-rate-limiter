@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     container_name: tb-rate-limiter
     ports:
       - "8080:8080"
