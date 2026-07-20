@@ -2,9 +2,10 @@ package storage
 
 import (
 	"context"
-	"hl-rate-limiter/internal/models"
 	"sync"
 	"time"
+
+	"hl-rate-limiter/internal/models"
 )
 
 type bucket struct {
@@ -23,7 +24,7 @@ func NewMemoryLimiter() *MemoryLimiter {
 	}
 }
 
-func (b *bucket) Take(now time.Time, limit float64, rateRefill float64) (bool, int, time.Duration) {
+func (b *bucket) Result(now time.Time, limit float64, rateRefill float64) (bool, int, time.Duration) {
 	duration := now.Sub(b.lastRefill).Seconds()
 	b.lastRefill = now
 	b.tokens += duration * rateRefill
@@ -42,7 +43,7 @@ func (b *bucket) Take(now time.Time, limit float64, rateRefill float64) (bool, i
 	return false, 0, time.Duration(wait * float64(time.Second))
 }
 
-func (ml *MemoryLimiter) Check(ctx context.Context, req models.LimiterRequest) (models.LimiterResponse, error) {
+func (ml *MemoryLimiter) Verify(ctx context.Context, req models.LimiterRequest) (models.LimiterResponse, error) {
 	now := time.Now()
 
 	windowDur, err := time.ParseDuration(req.Window)
@@ -65,7 +66,7 @@ func (ml *MemoryLimiter) Check(ctx context.Context, req models.LimiterRequest) (
 
 	rateRefill := float64(req.Limit) / windowDur.Seconds()
 
-	allowed, lastTokens, waits := b.Take(now, float64(req.Limit), rateRefill)
+	allowed, lastTokens, waits := b.Result(now, float64(req.Limit), rateRefill)
 
 	return models.LimiterResponse{
 		Allowed: allowed,

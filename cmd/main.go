@@ -14,7 +14,7 @@ import (
 
 type mockService struct{}
 
-func (s *mockService) Check(ctx context.Context, req models.LimiterRequest) (models.LimiterResponse, error) {
+func (s *mockService) Verify(ctx context.Context, req models.LimiterRequest) (models.LimiterResponse, error) {
 	return models.LimiterResponse{
 		Allowed: true,
 		Remaining: req.Limit-1,
@@ -33,7 +33,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /v1/limiter/check", limiterHandler.CreateResponse)
 	mux.HandleFunc("GET /panic", func(w http.ResponseWriter, r *http.Request) {
-		panic("Просто пиздец произошел")
+		panic("Паника")
 	})
 
 	wrappedHandler := middleware.Logger(middleware.Recovery(mux))

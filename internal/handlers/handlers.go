@@ -2,13 +2,14 @@ package handlers
 
 import (
 	"context"
-	"hl-rate-limiter/internal/models"
 	"net/http"
 	"encoding/json"
+
+	"hl-rate-limiter/internal/models"
 )
 
 type LimiterService interface {
-	Check(ctx context.Context, req models.LimiterRequest) (models.LimiterResponse, error)
+	Verify(ctx context.Context, req models.LimiterRequest) (models.LimiterResponse, error)
 }
 
 type LimiterHandler struct {
@@ -38,7 +39,7 @@ func(h *LimiterHandler) CreateResponse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	newRes, err := h.service.Check(r.Context(), newReq)
+	newRes, err := h.service.Verify(r.Context(), newReq)
 	if err != nil {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return

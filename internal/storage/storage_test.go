@@ -21,7 +21,7 @@ func TestBucket(t *testing.T) {
 		wantResetAfter	time.Duration
 	}{
 		{
-			name: 		"Доступ разрешен тест",
+			name: 		"Токенов достаточно",
 			now: 		timeStart,
 			limit: 		10.0,
 			rateRefill: 1.0,
@@ -33,7 +33,7 @@ func TestBucket(t *testing.T) {
 			wantResetAfter:	 1 * time.Second,
 		},
 		{
-			name: 		"Доступ запрещен тест",
+			name: 		"Токенов недостаточно",
 			now: 		timeStart,
 			limit: 		10.0,
 			rateRefill: 1.0,
@@ -45,7 +45,7 @@ func TestBucket(t *testing.T) {
 			wantResetAfter:	 500 * time.Millisecond,
 		},
 		{
-			name: 		"Доступ разрешен после восстановления тест",
+			name: 		"Токены успели восстановиться",
 			now: 		timeStart,
 			limit: 		10.0,
 			rateRefill: 1.0,
@@ -65,7 +65,7 @@ func TestBucket(t *testing.T) {
 				lastRefill: test.lastRefill,
 			}
 
-			allowed, remaining, resetAfter := b.Take(test.now, test.limit, test.rateRefill)
+			allowed, remaining, resetAfter := b.Result(test.now, test.limit, test.rateRefill)
 
 			if allowed != test.wantAllowed {
 				t.Errorf("FAIL %s: allowed = %v; ожидалось %v", test.name, allowed, test.wantAllowed)
