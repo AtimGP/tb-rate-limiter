@@ -32,5 +32,5 @@
 
 ## Старт
 ```bash
-git clone [https://github.com/AtimGP/tb-rate-limiter.git](https://github.com/AtimGP/tb-rate-limiter.git)
+git clone https://github.com/AtimGP/tb-rate-limiter.git
 cd tb-rate-limiter
