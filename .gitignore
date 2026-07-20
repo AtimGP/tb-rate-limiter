@@ -1,5 +1,12 @@
+main
 .env
 .db
 .db*
 .log
 .vscode/
+
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib

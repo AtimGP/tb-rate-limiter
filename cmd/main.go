@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"os"
 
-	"hl-rate-limiter/internal/handlers"
-	"hl-rate-limiter/internal/middleware"
-	"hl-rate-limiter/internal/models"
-	"hl-rate-limiter/internal/storage"
+	"tb-rate-limiter/internal/handlers"
+	"tb-rate-limiter/internal/middleware"
+	"tb-rate-limiter/internal/models"
+	"tb-rate-limiter/internal/storage"
 )
 
 type mockService struct{}

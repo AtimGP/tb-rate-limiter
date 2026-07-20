@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"hl-rate-limiter/internal/models"
+	"tb-rate-limiter/internal/models"
 )
 
 type bucket struct {

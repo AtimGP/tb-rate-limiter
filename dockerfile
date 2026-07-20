@@ -9,4 +9,4 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /app
 COPY --from=builder /app/hl-rate-limiter .
 EXPOSE 8080
-CMD ["./hl-rate-limiter"]
+CMD ["./tb-rate-limiter"]

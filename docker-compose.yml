@@ -5,6 +5,6 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    container_name: hl-rate-limiter
+    container_name: tb-rate-limiter
     ports:
       - "8080:8080"

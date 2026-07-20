@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"encoding/json"
 
-	"hl-rate-limiter/internal/models"
+	"tb-rate-limiter/internal/models"
 )
 
 type LimiterService interface {
